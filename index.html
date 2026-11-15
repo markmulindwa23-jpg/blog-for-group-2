@@ -547,7 +547,7 @@ $("#bD").onclick=function(){var j=JSON.stringify(D).replace(/</g,"\\u003c"),h=SR
 $("#bS").onclick=function(){if(!admin){msg("Click Edit page on the home page and enter the admin PIN first");return}if(!confirm("Replace the saved online data for ALL members with what is in this file?"))return;var ks=Object.keys(BAKED),n=0;ks.forEach(function(k){rpc("gblog_save_profile",{p_key:k,p_pin:admin,p_data:BAKED[k]}).then(function(){n++;msg("Synced "+n+" of "+ks.length+" - refresh the page")}).catch(function(e){msg(k+": "+(e.message||"could not save"))})})};
 $("#bR").onclick=function(){if(confirm("Remove all edits made in this browser?")){localStorage.removeItem(K);location.reload()}};
 document.addEventListener("input",function(ev){var e=ev.target.closest&&ev.target.closest("[data-sk],[data-pf]");if(!e||cur)return;var s=D._site,t=e.innerText.replace(/\n/g," ").trim();if(e.dataset.sk)s[e.dataset.sk]=t;else s.posts[+e.dataset.pi][e.dataset.pf]=t;save()});
-document.addEventListener("click",function(ev){if(!ed||cur)return;var a=ev.target.closest("[data-L]");if(!a)return;ev.preventDefault();var x=a.dataset.L,s=D._site;
+document.addEventListener("click",function(ev){if(!ed||cur)return;var a=ev.target.closest("[data-L]");if(!a)return;ev.preventDefault();var x=a.dataset.l,s=D._site;
 if(x=="av"){T={t:"lp",k:a.dataset.k};$("#fp").click();return}if(x=="pi"){T={t:"lpi",i:+a.dataset.i};$("#fp").click();return}if(x=="hi"){T={t:"lh"};$("#fp").click();return}
 if(x=="rh")s.hero="";else if(x=="ap")s.posts.push({tag:"Topic",title:"Post title",text:"Write a short summary here.",date:"Date",img:""});else if(x=="dp"){if(confirm("Remove this post?"))s.posts.splice(+a.dataset.i,1)}
 save();home()},true);
